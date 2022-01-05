@@ -6,10 +6,21 @@ window.onload = () => {
 
   // Aqui debemos agregar nuestro fetch
 
+  const apiCall = async () => {
+    try{
+      let response = await fetch("http://localhost:3031/api/movies") //hago el pedido
+      let peliculas = await response.json();
+  
+const favorites = JSON.parse(localStorage.getItem('favorites'))
 
 
-  /** Codigo que debemos usar para mostrar los datos en el frontend
-    let data = peliculas.data;
+let data = peliculas.data.filter(movie =>favorites.includes(movie.id));
+
+  console.log(data);
+   
+    // Codigo que debemos usar para mostrar los datos en el frontend
+    
+    
 
     data.forEach((movie) => {
       const card = document.createElement("div");
@@ -34,5 +45,19 @@ window.onload = () => {
       }
       card.appendChild(duracion);
     });
+
+    } catch(error) {
+      console.log(error);
+    }
+  };
+  apiCall();
+  
+  
+  
+  };
+
+  /** Codigo que debemos usar para mostrar los datos en el frontend
+   
   */
-};
+  
+

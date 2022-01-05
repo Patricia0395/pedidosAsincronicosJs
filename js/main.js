@@ -4,14 +4,19 @@ window.onload = () => {
   container.setAttribute("class", "container");
   app.appendChild(container);
   const $ = id => document.getElementById(id);
-const favorites = []
 
+
+if(!JSON.parse(localStorage.getItem("favorites"))){
+  const favorites = [];
   localStorage.setItem("favorites", JSON.stringify(favorites))
+
+}
+
 
   // Aqui debemos agregar nuestro fetch
 const apiCall = async () => {
   try{
-    let response = await fetch("http://localhost:3031/api/movies/") //ago el pedido
+    let response = await fetch("http://localhost:3031/api/movies") //ago el pedido
     let peliculas = await response.json();
 
     console.log(peliculas); // para ver que me responde
